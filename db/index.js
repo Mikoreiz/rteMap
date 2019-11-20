@@ -1,16 +1,16 @@
-const config = require("../config.json")
 const mysql = require("mysql")
+const config = require("../config.json")
 
-const mysqlConnection = mysql.createConnection({
-  host: config.mysqlConnectAuth.sqlHost,
-  user: config.mysqlConnectAuth.sqlUsername,
-  password: config.mysqlConnectAuth.sqlPassword,
+const pool = mysql.createConnection({
+  host: config.mysqlConnectAuth.Host,
+  user: config.mysqlConnectAuth.Username,
+  password: config.mysqlConnectAuth.Password,
   port: config.mysqlConnectAuth.port,
-  database: config.mysqlConnectAuth.sqlDB
+  database: config.mysqlConnectAuth.DB
 })
 
-const makeDb = () => {
-  mysqlConnection.connect(err => {
+const connectToDb = () => {
+  pool.connect(err => {
     if (!err) {
       console.log("DB connected")
     } else {
@@ -22,4 +22,17 @@ const makeDb = () => {
   })
 }
 
-module.exports = makeDb
+const makeQuery = query => {
+  pool.query(query, function(err, results, fields) {
+    if (!err) {
+      console.log(results)
+    } else {
+      console.log("Error: " + JSON.stringify(err))
+    }
+  })
+}
+
+module.exports = {
+  connect: connectToDb,
+  makeQuery: makeQuery
+}
