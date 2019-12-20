@@ -21,11 +21,10 @@ const connectToDb = () => {
     }
   })
 }
-
-const makeQuery = query => {
-  pool.query(query, function(err, results, fields) {
+const makeQuery = (query, callback) => {
+  pool.query(query, function(err, results) {
     if (!err) {
-      console.log(results)
+      return callback(null, results)
     } else {
       console.log("Error: " + JSON.stringify(err))
     }

@@ -1,4 +1,20 @@
-const db = require("../db/index")
+const handle = httpRequest => {
+  switch (httpRequest.method) {
+    case "GET":
+      return getRouteInfo(httpRequest)
+    default:
+      return "Method not allowed"
+  }
+}
 
-const connect = db.connect
-const query = db.makeQuery("select route_id from routes")
+function getRouteInfo(httpRequest) {
+  if (httpRequest.pathParams.route_id) {
+    return (
+      "SELECT * FROM routes WHERE route_id =" + httpRequest.pathParams.route_id
+    )
+  } else {
+    return "SELECT * FROM routes"
+  }
+}
+
+module.exports = handle
