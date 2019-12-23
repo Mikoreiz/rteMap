@@ -12,6 +12,11 @@ const handle = httpRequest => {
 function getRouteInfo(httpRequest) {
   if (httpRequest.pathParams.route_id) {
     return config.select.routeById + httpRequest.pathParams.route_id
+<<<<<<< HEAD
+=======
+  } else if (httpRequest.pathParams.stop_id) {
+    return config.select.routesByStop + httpRequest.pathParams.stop_id
+>>>>>>> routing
   } else {
     return config.select.allRoutes
   }
