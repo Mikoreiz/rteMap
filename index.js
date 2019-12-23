@@ -9,10 +9,11 @@ app.use(bodyParser.json())
 
 app.get("/route", routeController)
 app.get("/route/:route_id", routeController)
+app.get("/routeByStop/:stop_id", routeController)
 
 function routeController(req, res) {
   const httpRequest = adaptRequest(req)
-
+  console.log(httpRequest)
   db.makeQuery(handler(httpRequest), function(err, results, fields) {
     if (!err) {
       res.json(results)
