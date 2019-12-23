@@ -1,3 +1,5 @@
+const config = require("../config.json")
+
 const handle = httpRequest => {
   switch (httpRequest.method) {
     case "GET":
@@ -9,11 +11,9 @@ const handle = httpRequest => {
 
 function getRouteInfo(httpRequest) {
   if (httpRequest.pathParams.route_id) {
-    return (
-      "SELECT * FROM routes WHERE route_id =" + httpRequest.pathParams.route_id
-    )
+    return config.select.routeById + httpRequest.pathParams.route_id
   } else {
-    return "SELECT * FROM routes"
+    return config.select.allRoutes
   }
 }
 
