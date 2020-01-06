@@ -10,6 +10,7 @@ app.use(bodyParser.json())
 app.get("/routeAll", routeController)
 app.get("/route/:route_id", routeController)
 app.get("/routeByStop/:stop_id", routeController)
+app.get("/departureTime/:stop_id", routeController)
 
 function routeController(req, res) {
   const httpRequest = adaptRequest(req)

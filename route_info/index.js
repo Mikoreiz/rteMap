@@ -18,6 +18,14 @@ function getRouteInfo(httpRequest) {
       return config.select.route.byId + httpRequest.pathParams.route_id
     case "routeByStop":
       return config.select.route.byStop + httpRequest.pathParams.stop_id
+    case "departureTime":
+      return (
+        config.select.depart.timesByStop +
+        httpRequest.pathParams.stop_id +
+        config.select.depart.timeService +
+        "4" +
+        config.select.depart.orderBy
+      )
     default:
       return config.select.route.all
   }
