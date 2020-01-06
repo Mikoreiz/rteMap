@@ -7,7 +7,7 @@ const db = require("./db/index")
 const app = express()
 app.use(bodyParser.json())
 
-app.get("/route", routeController)
+app.get("/routeAll", routeController)
 app.get("/route/:route_id", routeController)
 app.get("/routeByStop/:stop_id", routeController)
 

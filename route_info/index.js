@@ -1,4 +1,5 @@
 const config = require("../config.json")
+const getRequestPath = require("../helpers/getRequestPath")
 
 const handle = httpRequest => {
   switch (httpRequest.method) {
@@ -10,12 +11,15 @@ const handle = httpRequest => {
 }
 
 function getRouteInfo(httpRequest) {
-  if (httpRequest.pathParams.route_id) {
-    return config.select.route.byId + httpRequest.pathParams.route_id
-  } else if (httpRequest.pathParams.stop_id) {
-    return config.select.route.byStop + httpRequest.pathParams.stop_id
-  } else {
-    return config.select.route.all
+  const path = getRequestPath(httpRequest.path)
+
+  switch (path) {
+    case "route":
+      return config.select.route.byId + httpRequest.pathParams.route_id
+    case "routeByStop":
+      return config.select.route.byStop + httpRequest.pathParams.stop_id
+    default:
+      return config.select.route.all
   }
 }
 
