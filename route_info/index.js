@@ -11,11 +11,11 @@ const handle = httpRequest => {
 
 function getRouteInfo(httpRequest) {
   if (httpRequest.pathParams.route_id) {
-    return config.select.routeById + httpRequest.pathParams.route_id
+    return config.select.route.byId + httpRequest.pathParams.route_id
   } else if (httpRequest.pathParams.stop_id) {
-    return config.select.routesByStop + httpRequest.pathParams.stop_id
+    return config.select.route.byStop + httpRequest.pathParams.stop_id
   } else {
-    return config.select.allRoutes
+    return config.select.route.all
   }
 }
 
